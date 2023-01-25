@@ -1,0 +1,47 @@
+USE master
+GO
+IF EXISTS (SELECT 1 FROM sys.databases WHERE [name] = N'TaskDb')
+BEGIN
+    ALTER DATABASE TaskDb SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE TaskDb;
+END;
+GO
+CREATE DATABASE TaskDb
+GO
+USE TaskDb
+GO
+
+
+CREATE TABLE Student 
+(
+    StudentId INTEGER UNIQUE NOT NULL,
+    Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Task 
+(
+    TaskId INTEGER UNIQUE NOT NULL,
+    Name VARCHAR(50) NOT NULL,
+    Description VARCHAR(100) NOT NULL,
+    DueDate DATE NOT NULL,
+    StudentId INTEGER NOT NULL,
+    FOREIGN KEY (StudentId) REFERENCES Student (StudentId)
+);
+
+CREATE TABLE Professor 
+(
+    ProfessorId INTEGER UNIQUE NOT NULL,
+    Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE TaskRating 
+(
+    TaskId INTEGER NOT NULL,
+    Rating INTEGER NOT NULL,
+    ProfessorId INTEGER NOT NULL,
+    UNIQUE (TaskId, ProfessorId),
+    FOREIGN KEY (TaskId) REFERENCES Task (TaskId),
+    FOREIGN KEY (ProfessorId) REFERENCES Professor (ProfessorId)
+);
