@@ -30,7 +30,10 @@ entity Professor
   ---
   * Name : VARCHAR(255) NOT NULL
   * Email : VARCHAR(255) NOT NULL
+  *Boss : INTEGER
 }
+
+Professor |o..o{ Professor
 
 entity TaskRating 
 {
@@ -41,4 +44,9 @@ entity TaskRating
   -- constraints --
   CHECK (Rating <= 5 AND Rating >= 1)
 }
+
+Student |o--o{ Task
+Task ||--|| TaskRating
+Professor |o--o{ TaskRating
+
 @enduml

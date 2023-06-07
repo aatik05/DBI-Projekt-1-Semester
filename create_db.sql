@@ -30,7 +30,9 @@ CREATE TABLE Task (
 CREATE TABLE Professor (
   ProfessorId INTEGER PRIMARY KEY,
   Name VARCHAR(255) NOT NULL,
-  Email VARCHAR(255) NOT NULL
+  Email VARCHAR(255) NOT NULL,
+  Boss INTEGER,
+  FOREIGN KEY(Boss) REFERENCES Professor(ProfessorId)
 );
 
 CREATE TABLE TaskRating (
