@@ -1,17 +1,14 @@
 USE tempdb;
 GO
 IF EXISTS(SELECT * FROM sys.databases WHERE [name] = N'Taskverwaltung')
-    BEGIN
-        -- Disconnect all users and recreate database.
+BEGIN
+    -- Disconnect all users and recreate database.
         ALTER DATABASE Taskverwaltung SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
     	DROP DATABASE Taskverwaltung;
-    END;
 END;
-USE Taskverwaltung;   -- Change to your database name (USE does not allow variables)
-GO
 CREATE DATABASE Taskverwaltung
 GO
-USE Taskverwaltung
+USE Taskverwaltung;   -- Change to your database name (USE does not allow variables)
 GO
 
 CREATE TABLE Student (
@@ -37,7 +34,7 @@ CREATE TABLE Professor (
 );
 
 CREATE TABLE TaskRating (
-  TaskId INTEGER NOT NULL,
+  TaskId INTEGER PRIMARY KEY,
   Rating INTEGER NOT NULL,
   ProfessorId INTEGER NOT NULL,
   CONSTRAINT fk_TaskRating_Task FOREIGN KEY (TaskId) REFERENCES Task(TaskId),

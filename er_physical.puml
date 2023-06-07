@@ -32,7 +32,7 @@ entity Professor
   * Email : VARCHAR(255) NOT NULL
 }
 
-CREATE TABLE TaskRating 
+entity TaskRating 
 {
   * TaskId : INTEGER NOT NULL
   ---
