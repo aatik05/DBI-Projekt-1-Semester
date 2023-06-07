@@ -1,0 +1,44 @@
+@startuml
+
+hide circle
+left to right direction
+
+entity Student
+{
+  * StudentId : INTEGER <<generated>>
+  ---
+  * Name : VARCHAR(255) NOT NULL
+  * Email : VARCHAR(255) NOT NULL
+}
+
+entity Task
+{
+  * TaskId : INTEGER <<generated>>
+  ---
+  * Name : VARCHAR(255) NOT NULL
+  * Description : VARCHAR(255) NOT NULL
+  * DueDate : DATE NOT NULL
+  * StudentId : INTEGER <<FK>>
+  -- constraints --
+  CHECK (DueDate <= 2023)
+}
+
+
+entity Professor 
+{
+  * ProfessorId : INTEGER <<generated>>
+  ---
+  * Name : VARCHAR(255) NOT NULL
+  * Email : VARCHAR(255) NOT NULL
+}
+
+CREATE TABLE TaskRating 
+{
+  * TaskId : INTEGER NOT NULL
+  ---
+  * Rating : INTEGER NOT NULL
+  * ProfessorId : INTEGER NOT NULL
+  -- constraints --
+  CHECK (Rating <= 5 AND Rating >= 1)
+}
+@enduml
